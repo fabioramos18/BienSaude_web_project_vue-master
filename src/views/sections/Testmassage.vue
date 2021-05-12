@@ -21,10 +21,10 @@
                 min-height="410"
               >
                 <v-img
-                v-if="massage.image"
+                v-if="massage.upload"
                   class="white--text align-end"
                   height="200px"
-                  :src="massage.image"
+                  :src="massage.upload"
                 />
                   <v-card-title>{{massage.title}}</v-card-title>
                   <v-card-text class="text--primary">
@@ -55,6 +55,7 @@
                   max-width="400"
                   min-height="410"
                 >
+                
                   <v-img
                   v-if="rehabilitation.image"
                     class="white--text align-end"
@@ -122,17 +123,17 @@ import{ db, storage} from '@/firebase.js';
       try{
         db.collection("massages").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          if (doc.data().image) {
+          if (doc.data().upload) {
             storage
               .ref()
-              .child(doc.data().image)
+              .child(doc.data().upload)
               .getDownloadURL()
               .then((url) => {
                 this.massages.push({
                   id: doc.id,
                   title: doc.data().title,
                   shortDescription: doc.data().shortDescription,
-                  image: url,
+                  upload: url,
                 })
               })
           } else {
@@ -152,10 +153,10 @@ import{ db, storage} from '@/firebase.js';
     try{
         db.collection("rehabilitations").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          if (doc.data().image) {
+          if (doc.data().upload) {
             storage
-              .ref()
-              .child(doc.data().image)
+              .ref ()
+              .child(doc.data().upload)
               .getDownloadURL()
               .then((url) => {
                 this.rehabilitations.push({
@@ -198,9 +199,7 @@ import{ db, storage} from '@/firebase.js';
 
 <style>
 
-#servicemenu{
-  background-color: aqua;
-}
+
 
 #Services{
  background-color:WhiteSmoke;

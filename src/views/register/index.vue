@@ -14,13 +14,45 @@
                                     </router-link>
                                 </v-col>
                             </v-row>
-                            <h2 class="text-center mt-10 mb-5">Create new account in BienSaúde</h2>
+                            <h2 class="text-center mt-10 mb-5">Criar uma nova conta BienSaúde</h2>
                             <div class="text-center mb-4">
-                                Already have an account? 
+                                Já tem uma conta? 
                                 <router-link to="/login">
-                                    <a class="primary--text text-decoration-underline" >Log in</a> 
+                                    <a class="primary--text text-decoration-underline" >Entrar</a> 
                                 </router-link>
                             </div>
+                            
+                             <div class="text-center ">
+                                <v-avatar 
+                                    color="grey" 
+                                    size="92"  
+                                    class="text-center"  
+                                    accept="image/"
+                                    label="File input"
+
+                                >
+                                    <img
+                                        :src="imageUrl"
+                                    >
+                                </v-avatar>
+                            </div>
+
+                            <div class="text-center mt-2">
+                                <v-btn  
+                                    color="primary" 
+                                    raised 
+                                    @click="onPickFile"
+                                >Carregar imagem</v-btn>
+
+                                <input 
+                                    type="file" 
+                                    ref="fileInput" 
+                                    acept="image/*"
+                                    @change="onFilePicked"
+                                >
+                            </div>
+
+
                             <v-form v-model="valid" class="valid">
                                 <v-row>
                                     <v-col
@@ -48,10 +80,12 @@
                                         required
                                         label="Sobrenome"
                                         name="Sobrenome"
+                                        prepend-icon="person"
                                         type="text"
                                         color="primary"/>
                                     </v-col>
                                 </v-row>
+                            
 
                                 <v-menu
                                     ref="menu"
@@ -62,10 +96,12 @@
                                     min-width="auto"
                                 >
                                     <template v-slot:activator="{ on, attrs }">
+                                   
+
                                     <v-text-field
                                         
                                         v-model="dateFormatted"
-                                        label="Birthday date"
+                                        label="Data de nascimento"
                                         prepend-icon="mdi-calendar"
                                         :rules="[rules.required]"
                                         readonly
@@ -76,6 +112,8 @@
                                     <v-date-picker
                                     ref="picker"
                                     v-model="date"
+                                    hint="MM/DD/YYYY formato"
+                                    no-title
                                     :max="new Date().toISOString().substr(0, 10)"
                                     min="1950-01-01"
                                     @change="save"
@@ -112,10 +150,10 @@
                                 v-model="password"
                                 prepend-icon="lock"
                                 :append-icon="show ? 'visibility' : 'visibility_off'"
-                                :rules="[rules.required, rules.min, rules.uplength, rules.num, rules.char, passwordRules]"
+                                :rules="[rules.required, rules.min, rules.uplength, rules.num, rules.char]"
                                 :type="show ? 'text' : 'password'"
                                 name="password"
-                                label="Enter Password"
+                                label="Password"
                                 hint="Utilize 8 ou mais carateres numa mistura de letras, números e símbolos. "
                                 @click:append="show = !show"
                                 ></v-text-field>
@@ -127,12 +165,12 @@
                                 :rules="[rules.required, rules.min, passwordConfirmationRule]"
                                 :type="show1 ? 'text' : 'password'"
                                 name="input-10-1"
-                                label="Re-enter Password"
+                                label="Digite novamente a password"
                                 @click:append="show1 = !show1"
                                 ></v-text-field>
                             </v-form>
                             <div class="text-center my-7">
-                            <v-btn  color="primary" :disabled="!valid" id="custom-disabled" @click="register" >SIGN UP</v-btn>
+                            <v-btn  color="primary" :disabled="!valid" id="custom-disabled" @click="register" >REGISTAR</v-btn>
                             </div>
                         </v-card-text>   
                     </v-card>
@@ -144,7 +182,7 @@
 </template>
 <script>
 
-import {fb,db} from '@/firebase.js';
+import {fb,db, storage} from '@/firebase.js';
 
 export default {
     data:() => ({
@@ -156,7 +194,8 @@ export default {
         show1: false,
         password: '',
         rePassword: '',
-
+        imageUrl: '',
+        image: null,
         firstname: '',
         lastname: '',
         dateFormatted: null,
@@ -167,19 +206,19 @@ export default {
         menu2: false,
 
         nameRules: [
-            v => !!v || 'Name is required',
-            v => v.length <= 10 || 'Name must be less than 10 characters',
+            v => !!v || 'Nome é obrigatório',
+            v => v.length <= 20 || 'O nome deve ser inferior a 20 caracteres',
         ],
         emailRules: [
-        v => !!v || 'E-mail is required',
+        v => !!v || 'E-mail é obrigatório',
         v => /^(([^<>ºª*+`´!"#$%=&/()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/.test(v) || 'E-mail must be valid',
       ],
       rules: {
-        required: (value) => !!value || "Required.",
-        min: (v) => v.length >= 8 || "Min 8 characters",
-        uplength: (v) => /[A-Z]+/.test(v) || 'Must have one uppercase character',
-        num:(v) => /[0-9]+/.test(v) || 'Must have one number',
-        char: (v) =>  /([._!@$%])/.test(v) || 'Must have one special character [._!@#$%]'
+        required: (value) => !!value || "Obrigatório.",
+        min: (v) => v.length >= 8 || "Min. 8 caracters",
+        uplength: (v) => /[A-Z]+/.test(v) || 'Deve ter um carácter maiúsculo',
+        num:(v) => /[0-9]+/.test(v) || 'Deve ter um número',
+        char: (v) =>  /([._!@$%])/.test(v) || 'Deve ter um carácter especial [._!@#$%]'
       },
 
     }),
@@ -188,7 +227,7 @@ export default {
         return this.formatDate(this.date)
         },
         passwordConfirmationRule() {
-        return this.password === this.rePassword || "Password must match";
+        return this.password === this.rePassword || "A palavra-passe deve corresponder";
         },
     },
     
@@ -199,6 +238,24 @@ export default {
 
     },
     methods: {
+
+        onPickFile(){
+            this.$refs.fileInput.click()
+        },
+        onFilePicked(event){
+            const files = event.target.files
+            let filename = files[0].name
+            if(filename.lastIndexOf('.') <= 0){
+                return alert('Escolha um ficheiro valido')
+            }
+            const fileReader = new FileReader()
+             fileReader.addEventListener('load', () => {
+                 this.imageUrl =  fileReader.result
+            })
+             fileReader.readAsDataURL(files[0])
+             this.image = files[0]
+        },
+
         save (date) {
             this.$refs.menu.save(date)
         },
@@ -218,6 +275,10 @@ export default {
       register(){
           fb.auth().createUserWithEmailAndPassword(this.email, this.password)
                 .then((user) => {
+    
+                const fileRef = "users/"+user.user.uid+"/profile.jpg"
+                storage.ref(fileRef).put(this.image)
+
                     db.collection("profiles").doc(user.user.uid).set({
                         name: this.firstname,
                         surname: this.lastname,
@@ -240,7 +301,7 @@ export default {
                     var errorCode = error.code;
                     var errorMessage = error.message;
                     if (errorCode == 'auth/weak-password') {
-                        alert('The password is too weak.');
+                        alert('A palavra-passe é demasiado fraca.');
                     } else {
                         alert(errorMessage);
                     }

@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import{db, storage} from '@/firebase.js';
+import{db,storage} from '@/firebase.js';
 
 export default {
     name: 'AddMassage',
@@ -106,6 +106,12 @@ export default {
             try{
                 this.isLoading = false
 
+                //para por a foto de user no storge
+                //var user = fb.auth().currentUser
+
+                //const fileRef = "users/"+user.uid+"/profile.jpg"
+
+
                 //upload file
                 const fileRef = 'uploads/massages/' + this.file.name
                 storage.ref(fileRef).put(this.file)
@@ -118,16 +124,35 @@ export default {
                         expectation: this.expectation,
                         id: this.id,
                         image: fileRef,
+                        upload: fileRef,
                 }
 
                 db.collection("massages").add(data)
                     .then((docRef) => {
-                        var washingtonRef = db.collection("massages").doc(docRef.id);
 
+                db.collection("massages").get().then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                        if (doc.data().image) {
+                            storage
+                            .ref()
+                            .child(doc.data().image)
+                            .getDownloadURL()
+                            .then((url) => {
+                                
+                            var washingtonRef = db.collection("massages").doc(docRef.id);
 
-                        return washingtonRef.update({
-                        id: docRef.id
+                                        return washingtonRef.update({
+                                        id: docRef.id,
+                                        image: url,
+                                        })
+
+                            })
+                        }
+
+                        // end pertinent change
                         })
+                    })
+                    
                         .then(function() {
                             console.log("Document successfully updated, Document id :" , docRef.id);
 

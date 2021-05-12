@@ -10,6 +10,7 @@
                 cols="12"
                 md="6"
                 class="pa-2"
+                v-for="profile in profiles" :key="profile.id"
               >
                 <v-card
     class="mx-auto"
@@ -24,7 +25,8 @@
       class="pa-2"
     >
       <v-img
-        src="/fr.jpg"
+        v-if="profile.image"
+        :src="profile.image"
       ></v-img>
     </v-col>
 
@@ -36,7 +38,7 @@
       
       <v-list-item-content class="">
         <v-list-item-title class="headline mb-1">
-         Fábio Ramos
+        {{profile.name}}
         </v-list-item-title>
         <v-list-item-subtitle>
           <v-icon> location_on </v-icon>
@@ -44,7 +46,7 @@
         </v-list-item-subtitle>
        
         <v-tab class="primary--text my-4 pa-0 text-decoration-underline" >
-            <span >Editar perfil</span> 
+            <span>Editar perfil</span> 
           </v-tab>
 
       </v-list-item-content>
@@ -77,7 +79,7 @@
               cols="12"
               md="8"
               class="pa-2">
-                <span>fabioramos10h@gmail.com</span>
+                <span>{{profile.email}}</span>
               </v-col>
             </v-row>
             <v-row class="email-content" no-gutters>
@@ -137,7 +139,7 @@
               cols="12"
               md="8"
               class="pa-2">
-                <span>January 31, 1990</span>
+                <span>{{profile.birth}}</span>
               </v-col>
             </v-row>
             <v-row class="email-content" no-gutters>
@@ -151,7 +153,7 @@
               cols="12"
               md="8"
               class="pa-2">
-                <span>Masculino</span>
+                <span>{{profile.gender}}</span>
               </v-col>
             </v-row>
         </div>
@@ -201,8 +203,6 @@
     </v-card-text>  
   </v-card>
   </v-col>
-
-            
           </v-row>
           </v-container>
     </div>   
@@ -212,15 +212,62 @@
 
 
 <script>
+import{ fb, db, storage} from '@/firebase.js';
   export default {
-    name: 'AbouPage',
-    
+    name: 'Profile',
+    data() {
+      return{
+      profiles:[],
+      
+      }
+    },
     props: {
       tag: {
         type: String,
         default: 'h1',
       },
     },
+
+    created(){
+      try{
+        var user = fb.auth().currentUser
+        var docRef = db.collection("profiles").doc(user.uid);
+
+const fileRef = "users/"+user.uid+"/profile.jpg"
+
+
+        docRef.get().then((doc) => {
+          if (fileRef != null) {
+            storage.ref()
+              .child(fileRef)
+              .getDownloadURL()
+              .then((url) => {
+                this.profiles.push({
+                  id: doc.id,
+                  name: doc.data().name +" "+doc.data().surname ,
+                  email: doc.data().email,
+                  birth: doc.data().birth,
+                  gender:doc.data().gender,
+                  image: url,
+                })
+              })
+          } else {
+            this.profiles.push({
+              id: doc.id,
+                  name: doc.data().name,
+                  email: doc.data().email,
+                  birth: doc.data().birth,
+                  gender:doc.data().gender,
+            })
+          }
+
+          // end pertinent change
+        
+      })
+    }catch(e){
+      console.log(e)
+    }
+    }
   }
 </script>
 

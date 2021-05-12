@@ -1,13 +1,7 @@
 <template>
   <v-theme-provider :dark="dark">
     <div>
-      <base-info-card title="horárioS" />
-      <base-title
-        size="body-1"
-        space="4"
-        weight="regular"
-      /> 
-
+      <base-info-card title="horários" />
       <base-body
       class="grey--text">
        <span id="day">Segunda-feira: </span>Das 10h ás 22h <br>
@@ -28,7 +22,6 @@
     name: 'BaseInfo',
 
      components: {
-     // BaseTitle: () => import('@/components/base/Title'),
       BaseBody: () => import('@/components/base/Body'),
     },
 

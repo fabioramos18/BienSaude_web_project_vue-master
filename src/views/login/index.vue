@@ -14,11 +14,11 @@
                                     </router-link>
                                 </v-col>
                             </v-row>
-                            <h2 class="text-center mt-10 mb-5">Sign in to your BienSaude account</h2>
+                            <h2 class="text-center mt-10 mb-5">Inicie sessão na sua conta BienSaude</h2>
                             <div class="text-center mb-4">
-                                Don't have an account? 
+                                Não tem uma conta? 
                                 <router-link to="/register">
-                                    <a class="primary--text text-decoration-underline">Register</a> 
+                                    <a class="primary--text text-decoration-underline">Registar</a> 
                                 </router-link>
                             </div>
                             <v-form v-model="valid" class="valid">
@@ -38,7 +38,7 @@
                                     :rules="[rules.required]"
                                     :type="show ? 'text' : 'password'"
                                     name="password"
-                                    label="Enter Password"
+                                    label=" Password"
                                     @click:append="show = !show"
                                 ></v-text-field>
                             </v-form>
@@ -47,7 +47,7 @@
                             </div>
                             <div>
                                 <div class="text-center primary--text text-decoration-underline" href="#four">
-                                    <a>Forget your password?</a> 
+                                    <a>Esqueçeu a sua palavra-passe?</a> 
                                 </div>
                             </div>
                         </v-card-text>   
@@ -73,11 +73,11 @@ export default {
         password: '',
         email: '',
         emailRules: [
-        v => !!v || 'E-mail is required',
+        v => !!v || 'E-mail é obrigatório',
         v => /^(([^<>ºª*+`´!"#$%=&/()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/.test(v) || 'E-mail must be valid',
       ],
       rules: {
-        required: (value) => !!value || " Password required.",
+        required: (value) => !!value || " Password é obrigatória.",
       },  
     }),
 
@@ -98,7 +98,7 @@ export default {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 if (errorCode === 'auth/wrong-password') {
-                    alert('Wrong password.');
+                    alert('Password incorreta.');
                 } else {
                     alert(errorMessage);
                 }

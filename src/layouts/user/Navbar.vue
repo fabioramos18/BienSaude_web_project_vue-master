@@ -2,11 +2,12 @@
  <nav >
       <v-app-bar app clipped-left >
         <v-app-bar-nav-icon  @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title class="text-uppercase gr ey--text">
+        <v-toolbar-title class="text-uppercase grey--text">
           <span class="font-weight-light">bien</span>
           <span>saude</span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
+        <router-link :to="{path: '/user', name: 'bookings'}" >
         <v-icon
           x-large
           class="mr-2"
@@ -14,9 +15,10 @@
         >
           add_circle_outline
         </v-icon>
+        </router-link>
         <router-link :to="{path: '/user', name: 'profile'}" >
         <v-list-item-avatar class="mr-0">
-          <v-img src="/fr.jpg" ></v-img>
+          <v-img :src="image" ></v-img>
         </v-list-item-avatar>
         </router-link>
         <v-menu offset-y>
@@ -40,7 +42,7 @@
       <v-navigation-drawer
         width="270"
         app 
-        permanent
+        expand-on-hove
         clipped
         v-model="drawer"
         class=" white--text "
@@ -49,7 +51,7 @@
         <v-list flat>
           <v-list-item class="px-2" link>
             <v-list-item-avatar >
-              <v-img src="/fr.jpg"></v-img>
+              <v-img :src="image"></v-img>
             </v-list-item-avatar>
             <v-list-item-content >
               <v-list-item-title class="title">
@@ -119,24 +121,7 @@
           <!--------------------------------->
 
           <!-----------SERVIÇOS------------->
-          <v-subheader>SERVIÇOS</v-subheader>
-          <v-list-item-group
-            v-model="selectedItem"
-            color="primary"
-          >
-            <v-list-item
-              v-for="(services, i) in services"
-              :key="i"
-              router :to="services.route"
-            >
-              <v-list-item-icon>
-                <v-icon v-text="services.icon"></v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title v-text="services.text"></v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-item-group>
+          
           <!--------------------------------->
 
           <!-----LOCALIZAÇÃO----->
@@ -217,7 +202,7 @@
 </template>
 
 <script>
-import{fb, db} from '@/firebase.js';
+import{fb,storage, db} from '@/firebase.js';
 export default {
 
     data() {
@@ -274,6 +259,17 @@ export default {
       var user = fb.auth().currentUser
       this.email = user.email;
 
+const fileRef = "users/"+user.uid+"/profile.jpg"
+
+      storage.ref()
+        .child(fileRef)
+        .getDownloadURL()
+        .then((url) => {
+          
+            this.image= url
+          
+        })
+
       db.collection('profiles').where('id', '==', user.uid).get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         
@@ -297,3 +293,6 @@ export default {
     },
   }
 </script>
+<style lang="css">
+  a { text-decoration: none; }
+</style>

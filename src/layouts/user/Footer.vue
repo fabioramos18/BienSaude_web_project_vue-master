@@ -4,7 +4,7 @@
     color="grey darken-4"
     dark
     min-height="72"
-    app
+    
   >
     <v-container>
       <v-row>

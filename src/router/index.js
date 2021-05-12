@@ -83,6 +83,11 @@ const router = new VueRouter({
           name: 'profile',
           component: () => import('@/views/profile/Index.vue'),
         },
+        {
+          path: 'bookings',
+          name: 'bookings',
+          component: () => import('@/views/bookings/Index.vue'),
+        },
       ],
       
     },
@@ -106,9 +111,9 @@ router.beforeEach((to, from, next) => {
   if (requiresAuth && !currentUser) {
     next({
       path: '/user',
-     // query: { redirect: to.fullPath }
+      //query: { redirect: to.fullPath }
     })
-  }  else if (!requiresAuth && currentUser) {
+  }  else if (requiresAuth && currentUser) {
       next({
         //path: '/e',
        //redirect: "/e"

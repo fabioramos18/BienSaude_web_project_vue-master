@@ -9,7 +9,10 @@
                 md="7"
                 class="pa-2"
               >
-                <img v-if="massage.image" :src="massage.image" class="img-fluid">
+                <img 
+                  v-if="massage.upload" 
+                  :src="massage.upload" 
+                  class="img-fluid">
             </v-col>
 
             <v-col
@@ -245,17 +248,17 @@ export default {
       try{
         db.collection("massages").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          if (doc.data().image) {
+          if (doc.data().upload) {
             storage
               .ref()
-              .child(doc.data().image)
+              .child(doc.data().upload)
               .getDownloadURL()
               .then((url) => {
                 this.massages.push({
                   id: doc.id,
                   title: doc.data().title,
                   shortDescription: doc.data().shortDescription,
-                  image: url,
+                  upload: url,
                 })
               })
           } else {
@@ -275,17 +278,17 @@ export default {
      try{
         db.collection("rehabilitations").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          if (doc.data().image) {
+          if (doc.data().upload) {
             storage
               .ref()
-              .child(doc.data().image)
+              .child(doc.data().upload)
               .getDownloadURL()
               .then((url) => {
                 this.rehabilitations.push({
                   id: doc.id,
                   title: doc.data().title,
                   shortDescription: doc.data().shortDescription,
-                  image: url,
+                  upload: url,
                 })
               })
           } else {
