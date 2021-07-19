@@ -6,56 +6,31 @@
           <span class="font-weight-light">bien</span>
           <span>saude</span>
         </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <router-link :to="{path: '/user', name: 'bookings'}" >
-        <v-icon
-          x-large
-          class="mr-2"
-          color="primary"
-        >
-          add_circle_outline
-        </v-icon>
-        </router-link>
-        <router-link :to="{path: '/user', name: 'profile'}" >
-        <v-list-item-avatar class="mr-0">
-          <v-img :src="image" ></v-img>
-        </v-list-item-avatar>
-        </router-link>
-        <v-menu offset-y>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn 
-              text
-              color="primary"
-              dark
-              v-bind="attrs"
-              v-on="on"
-            >
-              <span>{{name}}</span>
-              <v-icon right>expand_more</v-icon>
-            </v-btn>
-          </template>
-          
-        </v-menu>
+        
       </v-app-bar>
 
       <!--expand-on-hover-->
       <v-navigation-drawer
         width="270"
         app
+        src="/imgnavbar.jpg"
+        gradient="to right, rgba(14,12,11,.71), rgba(14,12,11,.71)"
         expand-on-hove
         clipped
-                src="/imgnavbar2.jpg"
-
         v-model="drawer"
-        class=" white--text "
+        class=" white--text"
       >
-       <router-link style="text-decoration: none" :to="{path: '/user', name: 'profile'}" >
+
         <v-list flat>
-          <v-list-item class="px-2" link>
+          <v-list-item class="px-2" >
             <v-list-item-avatar >
-              <v-img :src="image"></v-img>
+              <v-avatar color="grey">
+      <v-icon dark>
+        mdi-account-circle
+      </v-icon>
+    </v-avatar>
             </v-list-item-avatar>
-            <v-list-item-content >
+            <v-list-item-content>
               <v-list-item-title class="title">
                 {{name}} {{surname}}
               </v-list-item-title>
@@ -63,8 +38,6 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
-                </router-link>
-
 
         <v-divider></v-divider>
 
@@ -85,8 +58,40 @@
           </v-list-item-group>
           <!------------------>
 
+          <!-----ADICIONAR MASSAGEM----->
+          <v-list-item-group
+            color="primary"
+          >
+          
+              <v-list-item :to="{path: '/admin', name: 'addmassage'}">
+                <v-list-item-icon>
+                  <v-icon>spa</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Adicionar Massagem</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+          </v-list-item-group>
+          <!------------------>
+
+          <!-----ADICIONAR REABILITAÇÃO FÍSICA----->
+          <v-list-item-group
+            color="primary"
+          >
+          
+              <v-list-item :to="{path: '/admin', name: 'addrehabilitation'}">
+                <v-list-item-icon>
+                  <v-icon>fitness_center</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Adicionar Reabilitação</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+          </v-list-item-group>
+          <!------------------>
+
          <!-----------MARCAÇÃO------------->
-          <v-subheader>MARCAÇÕES</v-subheader>
+          <v-subheader>Consultas</v-subheader>
           <v-list-item-group
             v-model="selectedItem"
             color="primary"
@@ -106,6 +111,9 @@
           </v-list-item-group>
           <!--------------------------------->
 
+          <!-----------SERVIÇOS------------->
+          
+          <!--------------------------------->
 
           <!-----LOCALIZAÇÃO----->
           <v-subheader>LOCALIZAÇÃO</v-subheader>
@@ -180,6 +188,7 @@
           </v-list-item-group>
           <!------------------>
         </v-list>
+      
       </v-navigation-drawer>
     </nav>
 </template>
@@ -197,24 +206,12 @@ export default {
             selectedItem: 1,
             snackbar: true,
             
-            items: [
-              { title: 'Click Me' },
-              { title: 'Click Me' },
-              { title: 'Click Me' },
-              { title: 'Click Me 2' },
-            ],
-            admins: [
-                ['Management', 'mdi-account-multiple-outline'],
-                ['Settings', 'mdi-cog-outline'],
-            ],
-            cruds: [
-              ['Create', 'mdi-plus-outline'],
-              ['Read', 'mdi-file-outline'],
-              ['Update', 'mdi-update'],
-              ['Delete', 'mdi-delete'],
-            ],
+            
+            
             bookings: [
-              { text: 'Agenda', icon: 'event', route:'/user/myschedule' },
+              { text: 'Consultas Agendadas', icon: 'event', route:'scheduledappointments' },
+              { text: 'Solicitações', icon: 'history', route:'requests' },
+              { text: 'Histórico de Consulas', icon: 'history', route:'queryhistory' },
             ],
             services: [
               { text: 'Massagem', icon: 'spa', route:'/team' },
@@ -222,9 +219,11 @@ export default {
             ],
             account:[
               { text: 'Perfil', icon: 'mdi-account', route:'/user/profile' },
+              { text: 'Privacidade', icon: 'lock', route:'/' },
             ],
             support:[
-              { text: 'Perguntas frequentes', icon: 'help', route:'/user/questions' },
+              { text: 'Perguntas frequentes', icon: 'help', route:'/team' },
+              { text: 'WhatsApp 927 555 634', icon: 'call', route:'/' },
             ],
 
             item: [

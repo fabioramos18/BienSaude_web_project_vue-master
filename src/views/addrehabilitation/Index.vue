@@ -6,18 +6,15 @@
   import LoadSections from '@/mixins/load-sections'
 
   export default {
-    name: 'Contactos',
+    name: 'Inicio',
 
-    metaInfo: { title: 'Contactos' },
+    metaInfo: { title: 'Inicio' },
 
     extends: View,
 
     mixins: [
       LoadSections([
-        'hero-alt',
-        'contacts',
-        'keep-in-touch',
-        'map',
+        'add-rehabilitation',
       ]),
     ],
 

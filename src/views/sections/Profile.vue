@@ -82,7 +82,7 @@
                 <span>{{profile.email}}</span>
               </v-col>
             </v-row>
-            <v-row class="email-content" no-gutters>
+            <v-row class="address-content" no-gutters>
               <v-col
               cols="12"
               md="4"
@@ -96,7 +96,7 @@
                 <span>123, Rajar Goli, South Mugda</span>
               </v-col>
             </v-row>
-            <v-row class="email-content" no-gutters>
+            <v-row class="mobile-content" no-gutters>
               <v-col
               cols="12"
               md="4"
@@ -128,7 +128,7 @@
             Informações Básicas
           </h4>
           
-            <v-row class="email-content" no-gutters>
+            <v-row class="birth-content" no-gutters>
               <v-col
               cols="12"
               md="4"
@@ -142,7 +142,7 @@
                 <span>{{profile.birth}}</span>
               </v-col>
             </v-row>
-            <v-row class="email-content" no-gutters>
+            <v-row class="gender-content" no-gutters>
               <v-col
               cols="12"
               md="4"
@@ -154,6 +154,20 @@
               md="8"
               class="pa-2">
                 <span>{{profile.gender}}</span>
+              </v-col>
+            </v-row>
+            <v-row class="weight-content" no-gutters>
+              <v-col
+              cols="12"
+              md="4"
+              class="pa-2">
+                <span class="font-weight-bold">Peso:</span>
+              </v-col>
+              <v-col
+              cols="12"
+              md="8"
+              class="pa-2">
+                <span>{{profile.weight}}</span>
               </v-col>
             </v-row>
         </div>
@@ -179,7 +193,7 @@
     Consultas Agendadas:
   </v-card-title>
   <v-card-text class="display-3 text-center">
-      123
+      {{ca}}
   </v-card-text>
   
   </v-card>
@@ -199,7 +213,7 @@
       Consultas Realizadas:
     </v-card-title>
     <v-card-text class="display-3 text-center">
-      123
+      {{count}}
     </v-card-text>  
   </v-card>
   </v-col>
@@ -218,6 +232,8 @@ import{ fb, db, storage} from '@/firebase.js';
     data() {
       return{
       profiles:[],
+      count: null,
+      ca: null,
       
       }
     },
@@ -234,8 +250,7 @@ import{ fb, db, storage} from '@/firebase.js';
         var docRef = db.collection("profiles").doc(user.uid);
 
 const fileRef = "users/"+user.uid+"/profile.jpg"
-
-
+         
         docRef.get().then((doc) => {
           if (fileRef != null) {
             storage.ref()
@@ -248,6 +263,7 @@ const fileRef = "users/"+user.uid+"/profile.jpg"
                   email: doc.data().email,
                   birth: doc.data().birth,
                   gender:doc.data().gender,
+                  weight:doc.data().weight,
                   image: url,
                 })
               })
@@ -267,8 +283,35 @@ const fileRef = "users/"+user.uid+"/profile.jpg"
     }catch(e){
       console.log(e)
     }
+    const currentUser = fb.auth().currentUser
+    console.log(currentUser);
+
+
+ db.collection('bookings').where('userId', '==', user.uid).where('status', '==', "Concluido").get().then((querySnapshot) => {
+      
+        this.count = querySnapshot.size
+        console.log(querySnapshot.size);
+
+        
+      
+})
+
+db.collection('bookings').where('userId', '==', user.uid).where('status', '==', "Confirmado").get().then((querySnapshot) => {
+      
+        this.ca = querySnapshot.size
+        
+      
+})
+    
     }
   }
+
+
+
+
+
+
+
 </script>
 
 <style>

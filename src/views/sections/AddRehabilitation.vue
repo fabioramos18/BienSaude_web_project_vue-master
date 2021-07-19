@@ -4,7 +4,7 @@
                 <v-col cols="12" sm="10" md="10">
                     <v-card class="elevation-12">
                         <v-card-text class="pa-7 mt-12">
-                            <h2 class="text-center mt-10 mb-5">Adicionar nova massagem</h2>
+                            <h2 class="text-center mt-10 mb-5">Adicionar nova reabiltação física</h2>
                             <v-form ref="form" v-model="valid" class="valid">
                                  
                                     <v-text-field
@@ -113,7 +113,7 @@ export default {
 
 
                 //upload file
-                const fileRef = 'uploads/massages/' + this.file.name
+                const fileRef = 'uploads/rehabilitations/' + this.file.name
                 storage.ref(fileRef).put(this.file)
  
                 let data = {
@@ -127,10 +127,10 @@ export default {
                         upload: fileRef,
                 }
 
-                db.collection("massages").add(data)
+                db.collection("rehabilitations").add(data)
                     .then((docRef) => {
 
-                db.collection("massages").get().then((querySnapshot) => {
+                db.collection("rehabilitations").get().then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                         if (doc.data().image) {
                             storage
@@ -139,7 +139,7 @@ export default {
                             .getDownloadURL()
                             .then((url) => {
                                 
-                            var washingtonRef = db.collection("massages").doc(docRef.id);
+                            var washingtonRef = db.collection("rehabilitations").doc(docRef.id);
 
                                         return washingtonRef.update({
                                         id: docRef.id,

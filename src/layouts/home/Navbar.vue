@@ -6,7 +6,7 @@
           color="white"
         >
           <v-toolbar-title class="ml-6">
-            <router-link to="/">
+            <router-link to="/biensaude">
               <v-img max-width="230px" src="/logo.png" > </v-img>
             </router-link>
           </v-toolbar-title>

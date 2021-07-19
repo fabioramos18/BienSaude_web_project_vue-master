@@ -84,6 +84,9 @@
         <div>
           <div class="c-modal" v-show="modal_3">
               <!--aqq-->
+              <base-business-info>
+            frLorem ipsum dolor, sit amet consectetur adipisicing elit. Illo pariatur quidem, quis modi iure nihil commodi suscipit, corporis dicta adipisci, voluptatum quia cupiditate.
+          </base-business-info>
           </div>
           <div class="bg" v-show="modal_3" v-on:click="modal_3=!modal_3"></div>
         </div>
@@ -95,15 +98,16 @@
 
 <script>
 import{ db, storage} from '@/firebase.js';
-
+import BusinessInfo from '@/components/base/BusinessInfo.vue'
   export default {
     name: 'BaseHeading',
 
    // massId:this.$route.params.Pid,
-     
+   
 
     components: {
       BaseInfoCard: () => import('@/components/base/InfoCard'),
+      'base-business-info': BusinessInfo,
     },
     data() {
       return{

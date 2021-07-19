@@ -5,7 +5,7 @@
         title="Contactos de Apoio ao Cliente"
         pace="6"
       >
-        Esclareça dúvidas ou peça informações sobre os seus serviços.
+        Esclareça dúvidas ou peça informações sobre os nossos serviços.
         </base-info-card>
 
       <base-business-contact dense />

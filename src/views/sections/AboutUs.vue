@@ -42,20 +42,13 @@
                   >Bem-vindo/a
               </v-heading>
               <p text-center>
-                Lorem ipsum dolor sit amet, consectetur ad
-                ipiscin elit. Etiam vulputate augue vel felis gra
-                vida porta. Lorem ipsum dolor sit amet, cons
-                ectetur adipiscing elit.<br>
-                Lorem ipsum dolor sit amet, consectetur ad
-                ipiscin elit. Etiam vulputate augue vel felis gra
-                vida porta. Lorem ipsum dolor sit amet, cons
-                ectetur adipiscing elit.
+                Venha conhecer a nossa empresa de massagens e Reabilitações Físicas em Famões. <br>
+                Melhore a sua saúde connosco e veja os seus resultados positivos após cada sessão.                                            
               </p>
-              <router-link to="/e/sobre" style="text-decoration: none">
+                                                                                    
                 <base-btn class="mt-4">
-                  Saiba mais!
+                  Relaxe e seja feliz
                 </base-btn>
-              </router-link>
             </v-col>
           </v-row>
         </v-col>

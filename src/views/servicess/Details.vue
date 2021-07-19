@@ -19,6 +19,7 @@
               cols="12"
               md="5"
               class="pa-2"
+              height="35px"
             >
               <div id="info" class="pa-4">
                 <h1 class="mb-5">{{massage.title}}</h1>

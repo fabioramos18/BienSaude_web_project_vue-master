@@ -10,7 +10,7 @@
        <span id="day">Quinta-feira: </span>Das 10h ás 22h<br>
        <span id="day">Sexta-feira: </span>Das 10h ás 22h <br>
        <span id="day">Sábado: </span>Das 8h ás 22h <br>
-       <span id="day">Domingo: Encerrado</span>
+       <span id="day">Domingo: </span>Das 8h ás 22h<br>
       </base-body>
     </div>
   </v-theme-provider>

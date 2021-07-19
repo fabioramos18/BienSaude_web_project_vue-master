@@ -25,49 +25,12 @@ Para se manter informado sobre tudo o que a ver com cuidados de saúde, não pre
         <h2 
           class="mb-6 pt-16 text-center"
           >
-            O que pode encontrar no Centros de Saúde.pt
+         Como surgiu ?
+
         </h2>
         <p>
-          Precisamente porque sabemos que nem sempre é fácil encontrar respostas para as suas questões sobre centros de saúde e cuidados de saúde em geral, quisemos juntar tudo nesta plataforma.
-Aqui, pode não só encontrar um perfil para cada centro de saúde, com informações e contactos, como pode saber a opinião de outros utentes sobre o serviço e condições e ainda deixar o seu comentário sobre a sua experiência.
-Para além disto, pode encontrar respostas a perguntas frequentes sobre cuidados de saúde, e manter-se informado com dicas e alertas através do nosso blog.
-Para se manter informado sobre tudo o que a ver com cuidados de saúde, não precisa de sair da nossa plataforma:
+          A BienSaúde surgiu em Setembro de 2020. A primeira parte do nome (Bien), indica em português Bem, foi escolhido pois foi em Espanha que surgiu a ideia e saude que promove a saude.
         </p>
-
-
-        <h2 
-          class="text-center py-10 mt-10"
-          >
-            Galeria
-        </h2>
-        <v-row>
-    <v-col
-      v-for="n in 9"
-      :key="n"
-      class="d-flex child-flex"
-      cols="4"
-    >
-      <v-img
-        :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-        :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
-        aspect-ratio="1"
-        class="grey lighten-2"
-      >
-        <template v-slot:placeholder>
-          <v-row
-            class="fill-height ma-0"
-            align="center"
-            justify="center"
-          >
-            <v-progress-circular
-              indeterminate
-              color="grey lighten-5"
-            ></v-progress-circular>
-          </v-row>
-        </template>
-      </v-img>
-    </v-col>
-  </v-row>
       </v-container>
     </div>   
   

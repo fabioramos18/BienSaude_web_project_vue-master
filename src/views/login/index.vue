@@ -9,7 +9,7 @@
                         <v-card-text class="pa-7 mt-12">
                             <v-row>
                                 <v-col cols="12" md="8">
-                                    <router-link to="/">
+                                    <router-link to="/biensaude">
                                         <v-img  max-width="230px" src="/logo.png" > </v-img>
                                     </router-link>
                                 </v-col>
@@ -43,7 +43,7 @@
                                 ></v-text-field>
                             </v-form>
                             <div class="text-center my-7">
-                            <v-btn color="primary"  :disabled="!valid" id="custom-disabled" @click="login"> SIGN IN</v-btn>
+                            <v-btn color="primary"  :disabled="!valid" id="custom-disabled" @click="login"> ENTRAR </v-btn>
                             </div>
                             <div>
                                 <div class="text-center primary--text text-decoration-underline" href="#four">
@@ -90,8 +90,20 @@ export default {
         login(){
             fb.auth().signInWithEmailAndPassword(this.email, this.password)
            .then(() => {
-               
+                 const currentUser = fb.auth().currentUser
+
+
+            if(currentUser.uid == "J3k0UozhT4Rq4wnClYzX6lLHTQ83"){
+                this.$router.replace('admin/requests')
+            }   
+
+            else {
                 this.$router.replace('user/inicio')
+            }
+        
+
+
+                
                 
             }).catch(function(error) {
                 // Handle Errors here.

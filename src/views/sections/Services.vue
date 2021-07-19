@@ -26,9 +26,6 @@
                 SPA e Massagens
               </v-card-title>
 
-              <v-card-subtitle>
-                1,000 miles of wonder
-              </v-card-subtitle>
 
               <v-card-actions>
                 <v-btn
@@ -53,12 +50,9 @@
                 <v-divider></v-divider>
 
                  <v-card-text >
-                    Lorem ipsum dolor sit amet, consectetur ad ipiscin elit. 
-                    Etiam vulputate augue vel felis gra vida porta. 
-                    Lorem ipsum dolor sit amet, cons ectetur adipiscing elit.
-                    Lorem ipsum dolor sit amet, consectetur ad ipiscin elit. 
-                    Etiam vulputate augue vel felis gra vida porta. 
-                    Lorem ipsum dolor sit amet, cons ectetur adipiscing elit.                 
+                   A massagem é uma troca de energias em que, através de técnicas de deslizamento, fricção e amassamento, 
+                   se trabalha o sistema circulatório, linfático, 
+                   nervoso e energético, que proporcionam a descontração do corpo e da mente, combatendo a fadiga física e mental.t.                 
                  </v-card-text>
                 </div>
               </v-expand-transition>
@@ -79,9 +73,6 @@
                 Reabilitação física
               </v-card-title>
 
-              <v-card-subtitle>
-                1,000 miles of wonder
-              </v-card-subtitle>
 
               <v-card-actions>
                 <v-btn
@@ -106,12 +97,9 @@
                 <v-divider></v-divider>
 
                   <v-card-text>
-                    Lorem ipsum dolor sit amet, consectetur ad ipiscin elit. 
-                    Etiam vulputate augue vel felis gra vida porta. 
-                    Lorem ipsum dolor sit amet, cons ectetur adipiscing elit.
-                    Lorem ipsum dolor sit amet, consectetur ad ipiscin elit. 
-                    Etiam vulputate augue vel felis gra vida porta. 
-                    Lorem ipsum dolor sit amet, cons ectetur adipiscing elit. 
+                    Ao contrário do que se pensa, os benefícios da reabiiltação são visíveis não somente em um tratamento de lesões e doenças. É possível perceber o impacto positivo em todo o corpo, nas ações do dia a dia e, ainda, em seu comportamento físico e espiritual.
+
+É importante mencionar que a reabilitação não deve ser usada apenas em casos de recuperação, mas, sim, fazer parte da sua rotina de cuidados com a saúde. 
                  </v-card-text>
                 </div>
               </v-expand-transition>
@@ -132,9 +120,7 @@
                 Apoio ao cliente
               </v-card-title>
 
-              <v-card-subtitle>
-                1,000 miles of wonder
-              </v-card-subtitle>
+            
 
               <v-card-actions>
                 <v-btn
@@ -159,12 +145,7 @@
                 <v-divider></v-divider>
 
                  <v-card-text>
-                    Lorem ipsum dolor sit amet, consectetur ad ipiscin elit. 
-                    Etiam vulputate augue vel felis gra vida porta. 
-                    Lorem ipsum dolor sit amet, cons ectetur adipiscing elit.
-                    Lorem ipsum dolor sit amet, consectetur ad ipiscin elit. 
-                    Etiam vulputate augue vel felis gra vida porta. 
-                    Lorem ipsum dolor sit amet, cons ectetur adipiscing elit. 
+                    Para qualquer questão relacionada com um dos nossos serviços, contacte a nossa Linha de Apoio ao Cliente
                  </v-card-text>
                 </div>
               </v-expand-transition>

@@ -4,6 +4,21 @@
     class="my-10"
   >
     <v-container >
+      <v-spacer></v-spacer>
+      <div>
+
+             <v-alert
+             v-model="c"
+              color="primary"
+              dismissible
+              text
+               elevation="14"
+              type="success"
+            >
+
+            Consulta eliminada com sucesso ! 
+            </v-alert>
+           </div>
      <v-row no-gutters>
         <v-col
             cols="12"
@@ -52,7 +67,8 @@
                   Quadro clinico
                 </v-stepper-step>
                 <v-divider></v-divider>
-                <v-stepper-step step="5">
+                <v-stepper-step 
+                step="5">
                   Confirmação 
                 </v-stepper-step>
               </v-stepper-header>
@@ -647,8 +663,9 @@
                               <h3
                                 class="font-weight-medium"
                               >
-                                
+                                Se sim: 
                               </h3>
+                             
 
                               <v-row>
 
@@ -1125,7 +1142,8 @@
                   </v-btn>
                   <v-btn
                     color="primary"
-                     
+                    @click="confirm"
+
                   >
                     Confirmar
                   </v-btn>
@@ -1144,42 +1162,42 @@
 
 
 <script>
-import{ db } from '@/firebase.js';
+import{ fb, db } from '@/firebase.js';
   export default {
     name: 'Bookings',
     
     data () {
       return {
        
-
+c:false,
 valid:false,
          picker: null,
-        e1: 5,
+        e1: 1,
         value: null,
 
 
-        servicemassage:null, 
-        centermassage:null,
-        servicerehab:null,
-        centerrehab:null,
-        pickerfrom:null,
+        servicemassage:'', 
+        centermassage:'',
+        servicerehab:'',
+        centerrehab:'',
+        pickerfrom:'',
         selecteddays: [],
         selectedhours: [],
-        firstname:null,
-        surname:null,
-        email:null,
-        birth:null,
-        telemovel:null,
-        rdores:null,
-        dorlocal:null,
-        dorduracao:null,
-        rcans:null,
-        ralergias:null,
-        alergias:null,
-        ransiedade:null,
-        rpatologias:null,
-        patologias:null,
-        rfebre:null,
+        firstname:'',
+        surname:'',
+        email:'',
+        birth:'',
+        telemovel:'',
+        rdores:'',
+        dorlocal:'',
+        dorduracao:'',
+        rcans:'',
+        ralergias:'',
+        alergias:'',
+        ransiedade:'',
+        rpatologias:'',
+        patologias:'',
+        rfebre:'',
         
 
         modal_1: true,
@@ -1195,7 +1213,7 @@ valid:false,
         char: (v) =>  /([._!@$%])/.test(v) || 'Deve ter um carácter especial [._!@#$%]'
       },
       
-        rules: [v => v.length <= 500 || 'Max 500 caracters'],
+        
         
         select: ['Selecione o centro ou clinica'],
         massages:[],
@@ -1215,6 +1233,23 @@ valid:false,
     },
 
     created() {
+
+        var user = fb.auth().currentUser
+     //  this.email = user.email;
+        var docRef = db.collection("profiles").doc(user.uid);
+        docRef.get().then((doc) => {
+
+                  this.email = doc.data().email
+                  this.birth = doc.data().birth
+                  this.firstname = doc.data().name
+                  this.surname = doc.data().surname
+                  this.mobile = doc.data().mobile         
+
+        })
+
+
+
+        
        try{
         db.collection("massages").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -1235,6 +1270,46 @@ valid:false,
       console.log(e)
     }
   },
+  methods: {
+  confirm () {
+var user = fb.auth().currentUser
+
+db.collection("bookings").add({
+        dores: this.rdores+". " +this.dorlocal+ ". "+ this.dorduracao,
+        center: this.centermassage + this.centerrehab,
+        alergias: this.ralergias + this.alergias,
+        service: this.servicerehab + this.servicemassage,
+        favoriteDays: this.selecteddays,
+        favoriteHours: this.selectedhours,
+        dateFrom: this.pickerfrom,
+        utenteName: this.firstname,
+        utenteSurname: this.surname,
+        utentEmail: this.email,
+        utenteNumber: this.telemovel,
+        utenteBirth: this.birth,      
+        cansMusc: this.rcans,
+        ansiedade: this.ransiedade,
+        patologias: this.rpatologias + ". "+this.patologias, 
+        febre: this.rfebre,
+        status: "Em confirmação",
+        confirmateDay:'',
+        technical:'',
+        userId: user.uid,
+        
+        bookingday: Date.now() ,
+})
+.then((docRef) => {
+   this.$router.replace('/bookings')
+  this.c = true,
+  
+    console.log("Document written with ID: ", docRef.id);
+})
+.catch((error) => {
+    console.error("Error adding document: ", error);
+});
+
+  }
+  }
         
   }
 </script>

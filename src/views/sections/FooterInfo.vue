@@ -12,7 +12,7 @@
           <v-row>
             <v-col
               cols="12"
-              md="3"
+              md="4"
             >
             
               <base-info />
@@ -20,26 +20,21 @@
 
             <v-col
               cols="12"
-              md="3"
+              md="4"
             >
-              <base-info-card title="Contact" />
+              <base-info-card title="Contactos" />
 
               <base-business-contact dense />
             </v-col>
 
             <v-col
               cols="12"
-              md="3"
+              md="4"
             >
               <info-features />
             </v-col>
 
-            <v-col
-              cols="12"
-              md="3"
-            >
-              <instagram />
-            </v-col>
+            
           </v-row>
         </v-container>
       </v-responsive>
@@ -53,7 +48,6 @@
 
     components: {
       InfoFeatures: () => import('@/components/InfoFeatures'),
-      Instagram: () => import('@/components/Instagram'),
       BaseSection: () => import('@/components/base/Section'),
       BaseInfo: () => import('@/components/base/Info'),
       BaseInfoCard: () => import('@/components/base/InfoCard'),

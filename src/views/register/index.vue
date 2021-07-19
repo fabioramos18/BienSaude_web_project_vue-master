@@ -9,7 +9,7 @@
                         <v-card-text class="pa-7 mt-12">
                             <v-row>
                                 <v-col cols="12" md="8">
-                                    <router-link to="/">
+                                    <router-link to="/biensaude">
                                         <v-img  max-width="230px" src="/logo.png" > </v-img>
                                     </router-link>
                                 </v-col>
@@ -90,7 +90,6 @@
                                 <v-menu
                                     ref="menu"
                                     v-model="menu"
-                                    :close-on-content-click="false"
                                     transition="scale-transition"
                                     offset-y
                                     min-width="auto"

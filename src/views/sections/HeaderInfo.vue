@@ -19,9 +19,8 @@
         <h2 class=" display-1 text-uppercase mb-4">Centro de Massagem e Reabilitação Física</h2>
               
           <p>
-            Infographic hypotheses influencer user experience Long madel ture gen-z paradigm shift client partner network product seilans solve management influencer analytics leverage virality.
-            incubator seed round massmarket.
-            buyer agile development growth hacking business-to-consumer ecosystem
+                            Aproveite os nossos serviços de Massagens relaxantes e Reabilitação Física.
+
           </p>
           <div
             class="d-flex flex-wrap  align-center"

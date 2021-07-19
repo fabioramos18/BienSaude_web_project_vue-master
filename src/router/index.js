@@ -26,7 +26,7 @@ const router = new VueRouter({
     },
 
     {
-      path: '/e',
+      path: '/biensaude',
       component: () => import('@/layouts/home/Index.vue'),
       children: [
         {
@@ -72,13 +72,83 @@ const router = new VueRouter({
           path: 'inicio',
           name: 'inicio',
           component: () => import('@/views/inicio/Index.vue'),
+          meta: { requiresAuth: true }
         },
+        {
+          path: 'myhistoric',
+          name: 'myhistoric',
+          component: () => import('@/views/myhistoric/Index.vue'),
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'myschedule',
+          name: 'myschedule',
+          component: () => import('@/views/myschedule/Index.vue'),
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'profile',
+          name: 'profile',
+          component: () => import('@/views/profile/Index.vue'),
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'questions',
+          name: 'questions',
+          component: () => import('@/views/questions/Index.vue'),
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'bookings',
+          name: 'bookings',
+          component: () => import('@/views/bookings/Index.vue'),
+          meta: { requiresAuth: true }
+        },
+      ],
+      
+    },
+    {
+      path: '/admin',
+      meta: {requiresAuth: true},
+      component: () => import('@/layouts/admin/Index.vue'),
+      children: [
+        
+       /* {
+          path: 'inicio',
+          name: 'inicio',
+          component: () => import('@/views/inicio/Index.vue'),
+        },*/
+        
         {
           path: 'addmassage',
           name: 'addmassage',
           component: () => import('@/views/addmassage/Index.vue'),
+          meta: { requiresAuth: true }
         },
         {
+          path: 'addrehabilitation',
+          name: 'addrehabilitation',
+          component: () => import('@/views/addrehabilitation/Index.vue'),
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'scheduledappointments',
+          name: 'scheduledappointments',
+          component: () => import('@/views/scheduledappointments/Index.vue'),
+          meta: { requiresAuth: true }},
+        {
+          path: 'requests',
+          name: 'requests',
+          component: () => import('@/views/requests/Index.vue'),
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'queryhistory',
+          name: 'queryhistory',
+          component: () => import('@/views/queryhistory/Index.vue'),
+          meta: { requiresAuth: true }
+        },
+        /*{
           path: 'profile',
           name: 'profile',
           component: () => import('@/views/profile/Index.vue'),
@@ -87,7 +157,7 @@ const router = new VueRouter({
           path: 'bookings',
           name: 'bookings',
           component: () => import('@/views/bookings/Index.vue'),
-        },
+        },*/
       ],
       
     },
@@ -110,7 +180,7 @@ router.beforeEach((to, from, next) => {
   
   if (requiresAuth && !currentUser) {
     next({
-      path: '/user',
+      path: '/login',
       //query: { redirect: to.fullPath }
     })
   }  else if (requiresAuth && currentUser) {
